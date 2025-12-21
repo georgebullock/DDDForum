@@ -1,37 +1,39 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
+import asyncHandler from "../../utils/asyncHandler";
+import ApiError from "../../utils/ApiError";
 
 const userRouter = Router();
 const prisma = new PrismaClient();
 
 userRouter.post(
   "/new",
-  async (req: Request, res: Response, next: NextFunction) => {
-    // Get data from the request
-    const { email, username, password, firstName, lastName, id } = req.body;
+  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    console.log("req.body:", req.body);
 
-    try {
-      // Try to add data to the database
-      await prisma.user.create({
-        data: {
-          id,
-          email,
-          username,
-          firstName,
-          lastName,
-          password,
-        },
+    const { email, username, firstName, lastName, password } = req.body;
+
+    if (!email) {
+      throw new ApiError({
+        statusCode: 400,
+        error: "Validation Error: Email is required",
+        data: undefined,
+        success: false,
       });
-
-      res.send();
-    } catch (err) {
-      next(err);
-      console.log(err);
-      // If failure return error 409 | 400 | 500 with the right message
     }
 
-    // Maybe do something else here...
-  }
+    await prisma.user.create({
+      data: {
+        email,
+        username,
+        firstName,
+        lastName,
+        password,
+      },
+    });
+
+    res.status(201).json({ email, username, firstName, lastName, password });
+  })
 );
 
 userRouter.post("/edit/:userId ", (req: Request, res: Response) => {
