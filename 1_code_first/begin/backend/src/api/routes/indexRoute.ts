@@ -1,4 +1,3 @@
-import express from "express";
 import { Router, Request, Response, NextFunction } from "express";
 
 const indexRouter = Router();
