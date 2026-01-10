@@ -6,9 +6,18 @@ import ApiError from "../../utils/ApiError";
 const userRouter = Router();
 const prisma = new PrismaClient();
 
+type User = {
+  id: string;
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+};
+
 userRouter.post(
   "/new",
-  asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
     console.log("req.body:", req.body);
 
     const { email, username, firstName, lastName, password } = req.body;
@@ -17,6 +26,33 @@ userRouter.post(
       throw new ApiError({
         statusCode: 400,
         error: "Validation Error: Email is required",
+        data: undefined,
+        success: false,
+      });
+    }
+
+    if (!username) {
+      throw new ApiError({
+        statusCode: 400,
+        error: "Validation Error: Username is required",
+        data: undefined,
+        success: false,
+      });
+    }
+
+    if (!firstName) {
+      throw new ApiError({
+        statusCode: 400,
+        error: "Validation Error: Firstname is required",
+        data: undefined,
+        success: false,
+      });
+    }
+
+    if (!lastName) {
+      throw new ApiError({
+        statusCode: 400,
+        error: "Validation Error: Lastname is required",
         data: undefined,
         success: false,
       });
@@ -37,13 +73,39 @@ userRouter.post(
 );
 
 userRouter.post("/edit/:userId ", (req: Request, res: Response) => {
-  console.log("Get user by ID");
+  const { id } = req.body;
+
   return res.send("Get user by ID");
 });
 
-userRouter.get("/email", (req: Request, res: Response) => {
-  console.log("Get user by email");
-  return res.send("Get user by email");
-});
+userRouter.get(
+  "/",
+  asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
+    const { email } = req.query;
+
+    if (!email) {
+      throw new ApiError({
+        statusCode: 400,
+        error: "Validation Error: Email is required",
+        data: undefined,
+        success: false,
+      });
+    }
+
+    if (typeof email === "string") {
+      const data: User = await prisma.user.findUniqueOrThrow({
+        where: {
+          email: email,
+        },
+      });
+
+      res.status(200).json({
+        error: undefined,
+        data,
+        success: true,
+      });
+    }
+  })
+);
 
 export default userRouter;
