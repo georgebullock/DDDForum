@@ -11,8 +11,4 @@ indexRouter.get("/", (req: Request, res: Response, next: NextFunction) => {
   );
 });
 
-indexRouter.get("/error", (req: Request, res: Response, next: NextFunction) => {
-  throw new Error("Something went wrong");
-});
-
 export default indexRouter;
