@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
 import asyncHandler from "../../utils/asyncHandler";
 import ApiError from "../../utils/ApiError";
+import generatePassword from "../../utils/generatePassword";
 
 const userRouter = Router();
 const prisma = new PrismaClient();
@@ -20,7 +21,7 @@ userRouter.post(
   asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
     console.log("req.body:", req.body);
 
-    const { email, username, firstName, lastName, password } = req.body;
+    const { email, username, firstName, lastName } = req.body;
 
     if (!email) {
       throw new ApiError({
@@ -53,6 +54,17 @@ userRouter.post(
       throw new ApiError({
         statusCode: 400,
         error: "Validation Error: Lastname is required",
+        data: undefined,
+        success: false,
+      });
+    }
+
+    const password = generatePassword();
+
+    if (!password) {
+      throw new ApiError({
+        statusCode: 500,
+        error: "Password generation failed",
         data: undefined,
         success: false,
       });
