@@ -19,8 +19,6 @@ type User = {
 userRouter.post(
   "/new",
   asyncHandler(async (req: Request, res: Response, _next: NextFunction) => {
-    console.log("req.body:", req.body);
-
     const { email, username, firstName, lastName } = req.body;
 
     if (!email) {
