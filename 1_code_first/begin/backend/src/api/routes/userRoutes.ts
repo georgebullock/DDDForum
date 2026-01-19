@@ -68,7 +68,7 @@ userRouter.post(
       });
     }
 
-    await prisma.user.create({
+    const data = await prisma.user.create({
       data: {
         email,
         username,
@@ -78,7 +78,7 @@ userRouter.post(
       },
     });
 
-    res.status(201).json({ email, username, firstName, lastName, password });
+    res.status(201).json({ error: undefined, data: data, success: true });
   })
 );
 
