@@ -1,9 +1,9 @@
 import { randomInt } from "crypto";
 
-const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
-const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const NUMBERS = "0123456789";
-const SPECIAL = "!@#$%^&*()-_=+[]{}|;:,.<>?";
+const LOWERCASE = "abcdefghijkmnopqrstuvwxyz";
+const UPPERCASE = "ABCDEFGHJKLMNPRSTUVWXYZ";
+const NUMBERS = "23456789";
+const SPECIAL = "!#%+:=?@";
 
 const REQUIRED_SETS = [LOWERCASE, UPPERCASE, NUMBERS, SPECIAL];
 
