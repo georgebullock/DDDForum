@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import indexRouter from "./api/routes/indexRoute";
 import userRouter from "./api/routes/userRoutes";
 import ApiErrorHandler from "./api/middlewares/ApiErrorHandler";
@@ -7,6 +8,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+app.use(cors());
 app.use("/", indexRouter);
 app.use("/users", userRouter);
 app.use(ApiErrorHandler);
