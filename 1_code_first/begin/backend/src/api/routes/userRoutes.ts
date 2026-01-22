@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import asyncHandler from "../../utils/asyncHandler";
 import ApiError from "../../utils/ApiError";
 import generatePassword from "../../utils/generatePassword";
+import errors from "../errors/errors";
 
 const userRouter = Router();
 const prisma = new PrismaClient();
@@ -23,8 +24,8 @@ userRouter.post(
 
     if (!email) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Email is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingEmail,
         data: undefined,
         success: false,
       });
@@ -32,8 +33,8 @@ userRouter.post(
 
     if (!username) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Username is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingUsername,
         data: undefined,
         success: false,
       });
@@ -41,8 +42,8 @@ userRouter.post(
 
     if (!firstName) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Firstname is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingFirstname,
         data: undefined,
         success: false,
       });
@@ -50,8 +51,8 @@ userRouter.post(
 
     if (!lastName) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Lastname is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingLastname,
         data: undefined,
         success: false,
       });
@@ -61,8 +62,8 @@ userRouter.post(
 
     if (!password) {
       throw new ApiError({
-        statusCode: 500,
-        error: "Password generation failed",
+        statusCode: errors.serverError.statusCode,
+        error: errors.serverError.passwordGenerationFailed,
         data: undefined,
         success: false,
       });
@@ -79,7 +80,7 @@ userRouter.post(
     });
 
     res.status(201).json({ error: undefined, data: data, success: true });
-  })
+  }),
 );
 
 userRouter.post(
@@ -90,8 +91,8 @@ userRouter.post(
 
     if (!email) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Email is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingEmail,
         data: undefined,
         success: false,
       });
@@ -99,8 +100,8 @@ userRouter.post(
 
     if (!username) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Username is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingUsername,
         data: undefined,
         success: false,
       });
@@ -108,8 +109,8 @@ userRouter.post(
 
     if (!firstName) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Firstname is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingFirstname,
         data: undefined,
         success: false,
       });
@@ -117,8 +118,8 @@ userRouter.post(
 
     if (!lastName) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Lastname is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingLastname,
         data: undefined,
         success: false,
       });
@@ -143,7 +144,7 @@ userRouter.post(
         success: true,
       });
     }
-  })
+  }),
 );
 
 userRouter.get(
@@ -153,8 +154,8 @@ userRouter.get(
 
     if (!email) {
       throw new ApiError({
-        statusCode: 400,
-        error: "Validation Error: Email is required",
+        statusCode: errors.validationErrors.statusCode,
+        error: errors.validationErrors.missingEmail,
         data: undefined,
         success: false,
       });
@@ -173,7 +174,7 @@ userRouter.get(
         success: true,
       });
     }
-  })
+  }),
 );
 
 export default userRouter;
