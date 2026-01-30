@@ -1,20 +1,20 @@
 import { Request, Response, NextFunction } from "express";
-import ApiError from "../../utils/ApiError";
+import ApiError from "../errors/ApiError";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
-const ApiErrorHandler = (
+const apiErrorHandler = (
   err: Error,
   _req: Request,
   res: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ) => {
   if (err instanceof ApiError) {
     const { statusCode, error, data, success } = err.content;
-    res.status(statusCode).json({ error, data, success });
+    return res.status(statusCode).json({ error, data, success });
   }
 
   if (err instanceof PrismaClientKnownRequestError && err.code === "P2002") {
-    res.status(409).json({
+    return res.status(409).json({
       error: `${err.meta?.target}AlreadyTaken`,
       data: undefined,
       success: false,
@@ -22,7 +22,7 @@ const ApiErrorHandler = (
   }
 
   if (err instanceof PrismaClientKnownRequestError && err.code === "P2025") {
-    res.status(404).json({
+    return res.status(404).json({
       error: `UserNotFound`,
       data: undefined,
       success: false,
@@ -34,4 +34,4 @@ const ApiErrorHandler = (
     .json({ error: "ServerError", data: undefined, success: false });
 };
 
-export default ApiErrorHandler;
+export default apiErrorHandler;
