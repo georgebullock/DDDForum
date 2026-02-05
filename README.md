@@ -16,4 +16,4 @@ A small project that starts off using a basic MVC architecture and progresses to
 
 ## Current Status
 
-`In Progress`: Kicking off course in mid October 2025.
+`In Progress`: Since mid October 2025.
