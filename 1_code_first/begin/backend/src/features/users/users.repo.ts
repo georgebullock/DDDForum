@@ -4,17 +4,7 @@ const prisma = new PrismaClient();
 import ApiError from "../../errors/ApiError";
 import generatePassword from "../../utils/generatePassword";
 import errors from "../../errors/errors";
-
-type User = {
-  id: string;
-  email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-};
-
-type UserWithoutPassword = Omit<User, "password">;
+import { User, UserWithoutPassword } from "./users.types";
 
 export const insertUser = async ({
   email,
@@ -115,10 +105,19 @@ export const existsByUsername = async (username: User["username"]) => {
 };
 
 export const existsByEmail = async (email: User["email"]) => {
-  // This function needs to make a call to Prisma to see if a record with a email exists
   const data: UserWithoutPassword | null = await prisma.user.findUnique({
     where: {
       email: email,
+    },
+  });
+
+  return data;
+};
+
+export const existsByUserId = async (id: User["id"]) => {
+  const data: UserWithoutPassword | null = await prisma.user.findUnique({
+    where: {
+      id: id,
     },
   });
 

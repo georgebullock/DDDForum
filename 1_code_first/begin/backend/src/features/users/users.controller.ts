@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import * as usersRepo from "./users.repo";
+import * as usersService from "./users.service";
 import ApiError from "../../errors/ApiError";
 import errors from "../../errors/errors";
 
@@ -9,6 +9,8 @@ export const createUser = async (
   _next: NextFunction,
 ) => {
   const { email, username, firstName, lastName } = req.body;
+
+  console.log("req.body:", req.body);
 
   if (!email) {
     throw new ApiError({
@@ -46,14 +48,14 @@ export const createUser = async (
     });
   }
 
-  const data = await usersRepo.insertUser({
+  const data = await usersService.createUser({
     email,
     username,
     firstName,
     lastName,
   });
 
-  res.status(201).json({ error: undefined, data: data, success: true });
+  return res.status(201).json({ error: undefined, data: data, success: true });
 };
 
 export const updateUserById = async (
@@ -100,7 +102,7 @@ export const updateUserById = async (
     });
   }
 
-  const data = await usersRepo.updateUserById({
+  const data = await usersService.updateUserById({
     id,
     email,
     username,
@@ -140,7 +142,7 @@ export const getUserByEmail = async (
     });
   }
 
-  const data = await usersRepo.findUserByEmail(email);
+  const data = await usersService.findUserByEmail(email);
 
   return res.status(200).json({
     error: undefined,
