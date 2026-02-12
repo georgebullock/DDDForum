@@ -11,6 +11,7 @@ const errors = {
     statusCode: 409,
     usernameTaken: "Application Error: Username already taken",
     emailAlreadyInUse: "Application Error: Email already in use",
+    userNotFound: "Application Error: User not found",
   },
   serverErrors: {
     statusCode: 500,
