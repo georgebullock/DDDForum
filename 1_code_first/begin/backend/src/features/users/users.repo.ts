@@ -1,9 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
-import ApiError from "../../errors/ApiError";
-import generatePassword from "../../utils/generatePassword";
-import errors from "../../errors/errors";
 import { User, UserWithoutPassword } from "./users.types";
 
 export const insertUser = async ({
@@ -11,18 +7,8 @@ export const insertUser = async ({
   username,
   firstName,
   lastName,
-}: Omit<User, "id" | "password">) => {
-  const password = generatePassword();
-
-  if (!password) {
-    throw new ApiError({
-      statusCode: errors.serverErrors.statusCode,
-      error: errors.serverErrors.passwordGenerationFailed,
-      data: undefined,
-      success: false,
-    });
-  }
-
+  password,
+}: Omit<User, "id">) => {
   const data: User = await prisma.user.create({
     data: {
       email,
@@ -75,11 +61,15 @@ export const updateUserById = async ({
 };
 
 export const findUserByEmail = async (email: User["email"]) => {
-  const data: UserWithoutPassword = await prisma.user.findUniqueOrThrow({
+  const data: UserWithoutPassword | null = await prisma.user.findUnique({
     where: {
       email: email,
     },
   });
+
+  if (!data) {
+    return null;
+  }
 
   const userWithoutPassword: UserWithoutPassword = {
     id: data.id,
@@ -92,6 +82,7 @@ export const findUserByEmail = async (email: User["email"]) => {
   return userWithoutPassword;
 };
 
+// Note: The functions below check for users existence
 export const existsByUsername = async (username: User["username"]) => {
   const data: number = await prisma.user.count({
     where: {
