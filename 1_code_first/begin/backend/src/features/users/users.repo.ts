@@ -23,8 +23,6 @@ export const insertUser = async ({
     });
   }
 
-  const userExists = existsByUsername(username);
-
   const data: User = await prisma.user.create({
     data: {
       email,
@@ -95,31 +93,43 @@ export const findUserByEmail = async (email: User["email"]) => {
 };
 
 export const existsByUsername = async (username: User["username"]) => {
-  const data: UserWithoutPassword | null = await prisma.user.findUnique({
+  const data: number = await prisma.user.count({
     where: {
       username: username,
     },
   });
 
-  return data;
+  if (!data) {
+    return false;
+  }
+
+  return true;
 };
 
 export const existsByEmail = async (email: User["email"]) => {
-  const data: UserWithoutPassword | null = await prisma.user.findUnique({
+  const data: number = await prisma.user.count({
     where: {
       email: email,
     },
   });
 
-  return data;
+  if (!data) {
+    return false;
+  }
+
+  return true;
 };
 
 export const existsByUserId = async (id: User["id"]) => {
-  const data: UserWithoutPassword | null = await prisma.user.findUnique({
+  const data: number = await prisma.user.count({
     where: {
       id: id,
     },
   });
 
-  return data;
+  if (!data) {
+    return false;
+  }
+
+  return true;
 };
