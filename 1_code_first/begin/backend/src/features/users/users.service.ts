@@ -1,5 +1,5 @@
 import * as usersRepo from "./users.repo";
-import { User, UserWithoutPassword } from "./users.types";
+import { User } from "./users.types";
 import ApiError from "../../errors/ApiError";
 import errors from "../../errors/errors";
 
