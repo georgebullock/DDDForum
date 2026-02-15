@@ -10,8 +10,6 @@ export const createUser = async (
 ) => {
   const { email, username, firstName, lastName } = req.body;
 
-  console.log("req.body:", req.body);
-
   if (!email) {
     throw new ApiError({
       statusCode: errors.validationErrors.statusCode,
@@ -65,6 +63,15 @@ export const updateUserById = async (
 ) => {
   const id = req.params.userId;
   const { email, username, firstName, lastName } = req.body;
+
+  if (!id) {
+    throw new ApiError({
+      statusCode: errors.validationErrors.statusCode,
+      error: errors.validationErrors.missingId,
+      data: undefined,
+      success: false,
+    });
+  }
 
   if (!email) {
     throw new ApiError({

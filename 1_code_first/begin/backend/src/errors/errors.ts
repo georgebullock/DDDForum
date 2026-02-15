@@ -1,6 +1,7 @@
 const errors = {
   validationErrors: {
     statusCode: 400,
+    missingId: "Validation Error: id is required",
     missingEmail: "Validation Error: email is required",
     missingUsername: "Validation Error: username is required",
     missingFirstname: "Validation Error: firstName is required",
