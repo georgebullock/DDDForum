@@ -83,44 +83,46 @@ export const findUserByEmail = async (email: User["email"]) => {
 };
 
 // Note: The functions below check for users existence
-export const existsByUsername = async (username: User["username"]) => {
+export const existsByUsername = async (
+  username: User["username"],
+): Promise<boolean> => {
   const data: number = await prisma.user.count({
     where: {
       username: username,
     },
   });
 
-  if (!data) {
-    return false;
+  if (data > 0) {
+    return true;
   }
 
-  return true;
+  return false;
 };
 
-export const existsByEmail = async (email: User["email"]) => {
+export const existsByEmail = async (email: User["email"]): Promise<boolean> => {
   const data: number = await prisma.user.count({
     where: {
       email: email,
     },
   });
 
-  if (!data) {
-    return false;
+  if (data > 0) {
+    return true;
   }
 
-  return true;
+  return false;
 };
 
-export const existsByUserId = async (id: User["id"]) => {
+export const existsByUserId = async (id: User["id"]): Promise<boolean> => {
   const data: number = await prisma.user.count({
     where: {
       id: id,
     },
   });
 
-  if (!data) {
-    return false;
+  if (data > 0) {
+    return true;
   }
 
-  return true;
+  return false;
 };
