@@ -11,7 +11,7 @@ export const createUser = async ({
   email,
 }: Omit<User, "id" | "password">) => {
   const userExistsByUsername = await usersRepo.existsByUsername(username);
-  const userExistsByEmail = await usersRepo.existsByEmail(username);
+  const userExistsByEmail = await usersRepo.existsByEmail(email);
 
   if (userExistsByUsername) {
     throw new ApiError({
@@ -60,7 +60,7 @@ export const updateUserById = async ({
   lastName,
   email,
 }: Omit<User, "password">) => {
-  const userExists = await usersRepo.existsByUserId(username);
+  const userExists = await usersRepo.existsByUserId(id);
 
   if (!userExists) {
     throw new ApiError({
