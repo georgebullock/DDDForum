@@ -92,11 +92,7 @@ export const existsByUsername = async (
     },
   });
 
-  if (data > 0) {
-    return true;
-  }
-
-  return false;
+  return data > 0;
 };
 
 export const existsByEmail = async (email: User["email"]): Promise<boolean> => {
@@ -106,11 +102,7 @@ export const existsByEmail = async (email: User["email"]): Promise<boolean> => {
     },
   });
 
-  if (data > 0) {
-    return true;
-  }
-
-  return false;
+  return data > 0;
 };
 
 export const existsByUserId = async (id: User["id"]): Promise<boolean> => {
@@ -120,9 +112,5 @@ export const existsByUserId = async (id: User["id"]): Promise<boolean> => {
     },
   });
 
-  if (data > 0) {
-    return true;
-  }
-
-  return false;
+  return data > 0;
 };
