@@ -67,19 +67,7 @@ export const findUserByEmail = async (email: User["email"]) => {
     },
   });
 
-  if (!data) {
-    return null;
-  }
-
-  const userWithoutPassword: UserWithoutPassword = {
-    id: data.id,
-    email: data.email,
-    username: data.username,
-    firstName: data.firstName,
-    lastName: data.lastName,
-  };
-
-  return userWithoutPassword;
+  return data;
 };
 
 // Note: The functions below check for users existence
