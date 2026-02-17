@@ -1,6 +1,6 @@
 const errors = {
   validationErrors: {
-    statusCode: 400,
+    statusCode400: 400,
     missingId: "Validation Error: id is required",
     missingEmail: "Validation Error: email is required",
     missingUsername: "Validation Error: username is required",
@@ -18,7 +18,7 @@ const errors = {
       "Application Error: Your query violated a field's unique value constraint",
   },
   serverErrors: {
-    statusCode: 500,
+    statusCode500: 500,
     serverError: `ServerError: Unknown server error`,
     passwordGenerationFailed: `ServerError: Password generation failed`,
   },

@@ -15,7 +15,7 @@ export const createUser = async ({
 
   if (userExistsByUsername) {
     throw new ApiError({
-      statusCode: errors.applicationErrors.statusCode,
+      statusCode: errors.applicationErrors.statusCode409,
       error: errors.applicationErrors.usernameTaken,
       data: undefined,
       success: false,
@@ -24,7 +24,7 @@ export const createUser = async ({
 
   if (userExistsByEmail) {
     throw new ApiError({
-      statusCode: errors.applicationErrors.statusCode,
+      statusCode: errors.applicationErrors.statusCode409,
       error: errors.applicationErrors.emailAlreadyInUse,
       data: undefined,
       success: false,
@@ -35,7 +35,7 @@ export const createUser = async ({
 
   if (!password) {
     throw new ApiError({
-      statusCode: errors.serverErrors.statusCode,
+      statusCode: errors.serverErrors.statusCode500,
       error: errors.serverErrors.passwordGenerationFailed,
       data: undefined,
       success: false,
@@ -64,7 +64,7 @@ export const updateUserById = async ({
 
   if (!userExists) {
     throw new ApiError({
-      statusCode: errors.applicationErrors.statusCode,
+      statusCode: errors.applicationErrors.statusCode404,
       error: errors.applicationErrors.userNotFound,
       data: undefined,
       success: false,
@@ -87,7 +87,7 @@ export const findUserByEmail = async (email: User["email"]) => {
 
   if (!data) {
     throw new ApiError({
-      statusCode: errors.applicationErrors.statusCode,
+      statusCode: errors.applicationErrors.statusCode404,
       error: errors.applicationErrors.userNotFound,
       data: undefined,
       success: false,

@@ -12,7 +12,7 @@ export const createUser = async (
 
   if (!email) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingEmail,
       data: undefined,
       success: false,
@@ -21,7 +21,7 @@ export const createUser = async (
 
   if (!username) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingUsername,
       data: undefined,
       success: false,
@@ -30,7 +30,7 @@ export const createUser = async (
 
   if (!firstName) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingFirstname,
       data: undefined,
       success: false,
@@ -39,7 +39,7 @@ export const createUser = async (
 
   if (!lastName) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingLastname,
       data: undefined,
       success: false,
@@ -66,7 +66,7 @@ export const updateUserById = async (
 
   if (!id) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingId,
       data: undefined,
       success: false,
@@ -75,7 +75,7 @@ export const updateUserById = async (
 
   if (!email) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingEmail,
       data: undefined,
       success: false,
@@ -84,7 +84,7 @@ export const updateUserById = async (
 
   if (!username) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingUsername,
       data: undefined,
       success: false,
@@ -93,7 +93,7 @@ export const updateUserById = async (
 
   if (!firstName) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingFirstname,
       data: undefined,
       success: false,
@@ -102,7 +102,7 @@ export const updateUserById = async (
 
   if (!lastName) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingLastname,
       data: undefined,
       success: false,
@@ -133,7 +133,7 @@ export const getUserByEmail = async (
 
   if (!email) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.missingEmail,
       data: undefined,
       success: false,
@@ -142,7 +142,7 @@ export const getUserByEmail = async (
 
   if (!(typeof email === "string")) {
     throw new ApiError({
-      statusCode: errors.validationErrors.statusCode,
+      statusCode: errors.validationErrors.statusCode400,
       error: errors.validationErrors.emailMustBeString,
       data: undefined,
       success: false,
