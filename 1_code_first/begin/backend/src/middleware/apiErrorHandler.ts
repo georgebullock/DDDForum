@@ -20,7 +20,7 @@ const apiErrorHandler = (
       Array.isArray(err.meta.target)
     ) {
       if (err.meta.target[0] === "email") {
-        return res.status(errors.applicationErrors.statusCode).json({
+        return res.status(errors.applicationErrors.statusCode409).json({
           error: errors.applicationErrors.emailAlreadyInUse,
           data: undefined,
           success: false,
@@ -28,7 +28,7 @@ const apiErrorHandler = (
       }
 
       if (err.meta.target[0] === "username") {
-        return res.status(errors.applicationErrors.statusCode).json({
+        return res.status(errors.applicationErrors.statusCode409).json({
           error: errors.applicationErrors.usernameTaken,
           data: undefined,
           success: false,
@@ -36,15 +36,15 @@ const apiErrorHandler = (
       }
     }
 
-    return res.status(errors.applicationErrors.statusCode).json({
-      error: `Error: Unhandled PrismClientKnownRequestError`,
+    return res.status(errors.applicationErrors.statusCode409).json({
+      error: errors.applicationErrors.uniqueFieldConstraintViolation,
       data: undefined,
       success: false,
     });
   }
 
   if (err instanceof PrismaClientKnownRequestError && err.code === "P2025") {
-    return res.status(errors.serverErrors.statusCode).json({
+    return res.status(errors.applicationErrors.statusCode404).json({
       error: errors.applicationErrors.userNotFound,
       data: undefined,
       success: false,
