@@ -9,8 +9,8 @@ const errors = {
     emailMustBeString: "Validation Error: Email parameter must be a string",
   },
   applicationErrors: {
-    statusCode404: 409,
-    statusCode409: 404,
+    statusCode409: 409,
+    statusCode404: 404,
     usernameTaken: "Application Error: Username already taken",
     emailAlreadyInUse: "Application Error: Email already in use",
     userNotFound: "Application Error: User not found",
