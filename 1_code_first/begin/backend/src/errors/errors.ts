@@ -14,8 +14,7 @@ const errors = {
     usernameTaken: "Application Error: Username already taken",
     emailAlreadyInUse: "Application Error: Email already in use",
     userNotFound: "Application Error: User not found",
-    uniqueFieldConstraintViolation:
-      "Application Error: Your query violated a field's unique value constraint",
+    uniqueFieldConstraintViolation: `Application Error: Your query violated a unique field constraint`,
   },
   serverErrors: {
     statusCode500: 500,
