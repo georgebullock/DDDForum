@@ -60,17 +60,6 @@ export const updateUserById = async ({
   lastName,
   email,
 }: Omit<User, "password">) => {
-  const userExists = await usersRepo.existsByUserId(id);
-
-  if (!userExists) {
-    throw new ApiError({
-      statusCode: errors.applicationErrors.statusCode404,
-      error: errors.applicationErrors.userNotFound,
-      data: undefined,
-      success: false,
-    });
-  }
-
   const data = await usersRepo.updateUserById({
     id,
     email,
