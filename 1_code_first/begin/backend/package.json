@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start:dev": "npx nodemon",
+    "prisma-studio": "npx prisma studio",
     "start": "npm run build && node build/index.js",
     "lint": "eslint . --ext .ts",
     "prettier-format": "run-script-os",
@@ -28,6 +29,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/jest": "^28.1.8",
     "@types/node": "^18.6.1",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
@@ -50,6 +52,8 @@
   "dependencies": {
     "@prisma/client": "6.18.0",
     "@types/express": "^5.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
     "express": "^5.2.1",
     "jest-cucumber": "^3.0.1",
     "prisma": "^6.18.0"

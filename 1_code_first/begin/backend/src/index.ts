@@ -1,15 +1,15 @@
+import "dotenv/config";
 import express from "express";
-import indexRouter from "./api/routes/indexRoute";
-import userRouter from "./api/routes/userRoutes";
-import ApiErrorHandler from "./api/middlewares/ApiErrorHandler";
-
+import cors from "cors";
+import router from "./routes";
+import apiErrorHandler from "./middleware/apiErrorHandler";
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use("/", indexRouter);
-app.use("/users", userRouter);
-app.use(ApiErrorHandler);
+app.use(cors());
+app.use(router);
+app.use(apiErrorHandler);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
