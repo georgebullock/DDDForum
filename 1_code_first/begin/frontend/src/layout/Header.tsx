@@ -6,7 +6,7 @@ function Header({ className }: HeaderProps) {
   return (
     <>
       <header className={className}>
-        <div className="flex justify-center">
+        <div>
           <img src="./dddforumlogo.png" />
         </div>
         <div>

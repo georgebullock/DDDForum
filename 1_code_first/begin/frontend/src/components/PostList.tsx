@@ -32,18 +32,18 @@ const posts = [
 const postList = posts.map((post) => {
   return (
     <li className="flex">
-      <div className="flex flex-col justify-center mr-4">
+      <div className="mr-4 flex flex-col justify-center">
         <div className="">
           <img className="invert" src="./arrow.svg" />
         </div>
-        <div className="inline-block text-center py-4">{post.votes}</div>
+        <div className="inline-block py-4 text-center">{post.votes}</div>
         <div className="">
-          <img className={"transform rotate-180 invert"} src="./arrow.svg" />
+          <img className={"rotate-180 transform invert"} src="./arrow.svg" />
         </div>
       </div>
       <article className="">
-        <h3 className="text-2xl mb-3">{post.title}</h3>
-        <div className="flex gap-4 mb-1.5">
+        <h3 className="mb-3 text-2xl">{post.title}</h3>
+        <div className="mb-1.5 flex gap-4">
           <span>{post.timeAgo}</span>
           <a href="/member/username">{post.username}</a>
         </div>

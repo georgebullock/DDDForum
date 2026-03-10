@@ -1,23 +1,23 @@
 import type { ComponentPropsWithoutRef } from "react";
 import PostList from "../components/PostList";
 
-type ContentContainerProps = ComponentPropsWithoutRef<"section">;
+type MainContentProps = ComponentPropsWithoutRef<"section">;
 
-function ContentContainer({ className }: ContentContainerProps) {
+function MainContent({ className }: MainContentProps) {
   return (
     <>
       <div className={className}>
-        <div className="flex mt-8 text-3xl gap-2.5">
+        <div className="mt-8 flex gap-2.5 text-3xl">
           <h2>Popular</h2>
           <span>|</span>
           <h2> New</h2>
         </div>
         <div>
-          <PostList className="flex flex-col gap-5 my-5"></PostList>
+          <PostList className="my-5 flex flex-col gap-5"></PostList>
         </div>
       </div>
     </>
   );
 }
 
-export default ContentContainer;
+export default MainContent;
