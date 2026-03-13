@@ -13,7 +13,7 @@ function MainContent({ className }: MainContentProps) {
           <h2> New</h2>
         </div>
         <div>
-          <PostList className="my-5 flex flex-col gap-5"></PostList>
+          <PostList className="my-3 flex flex-col gap-5"></PostList>
         </div>
       </div>
     </>

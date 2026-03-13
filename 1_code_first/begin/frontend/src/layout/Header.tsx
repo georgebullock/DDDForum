@@ -13,11 +13,11 @@ function Header({ className }: HeaderProps) {
           <h1 className="text-4xl">Product Forum</h1>
           <h3>Where product managers connect</h3>
         </div>
-        <nav className="flex gap-3 text-2xl">
-          <div>
+        <nav className="flex gap-5 text-2xl">
+          <div className="flex min-w-28 justify-center border border-yellow-600 p-2">
             <a href="/submit">Submit</a>
           </div>
-          <div>
+          <div className="flex min-w-28 justify-center border border-yellow-600 p-2">
             <a href="/register.html">Join</a>
           </div>
         </nav>
