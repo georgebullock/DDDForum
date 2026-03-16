@@ -160,6 +160,7 @@ Use this sequence to avoid ambiguity:
 ## 3. Coding Standards
 
 - **TypeScript**: 5.9+, `async/await` preferred.
+- **Styling**: Tailwind 4.2+. This project uses the default Tailwind utilites. There is no custom
 - **Formatting**: Handled by Prettier.
 - **Naming**: `camelCase` (functions/variables), `PascalCase` (classes, react components, interface, types), `SCREAMING_SNAKE` (constants).
 
