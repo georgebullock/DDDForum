@@ -18,7 +18,7 @@ function Header({ className }: HeaderProps) {
             <a href="/submit">Submit</a>
           </div>
           <div className="flex min-w-28 justify-center border border-yellow-600 p-2">
-            <a href="/register.html">Join</a>
+            <a href="/register">Join</a>
           </div>
         </nav>
       </header>
