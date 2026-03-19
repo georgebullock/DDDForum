@@ -29,35 +29,40 @@ const posts = [
   },
 ];
 
-const postList = posts.map((post) => {
+const PostList = ({ className, ...rest }: PostListProps) => {
   return (
-    <li className="flex">
-      <div className="mr-4 flex flex-col justify-center">
-        <div className="">
-          <img className="invert" src="./arrow.svg" />
-        </div>
-        <div className="inline-block py-4 text-center">{post.votes}</div>
-        <div className="">
-          <img className={"rotate-180 transform invert"} src="./arrow.svg" />
-        </div>
-      </div>
-      <article className="">
-        <h3 className="mb-3 text-2xl">{post.title}</h3>
-        <div className="mb-1.5 flex gap-4">
-          <span>{post.timeAgo}</span>
-          <a href="/member/username">{post.username}</a>
-        </div>
-        <div className="flex gap-2">
-          <span className="">{post.comments}</span>
-          <span>comments</span>
-        </div>
-      </article>
-    </li>
+    <ul className={className} {...rest}>
+      {posts.map((post) => {
+        return (
+          <li key={post.id} className="flex">
+            <div className="mr-4 flex flex-col justify-center">
+              <div className="">
+                <img className="invert" src="./arrow.svg" />
+              </div>
+              <div className="inline-block py-4 text-center">{post.votes}</div>
+              <div className="">
+                <img
+                  className={"rotate-180 transform invert"}
+                  src="./arrow.svg"
+                />
+              </div>
+            </div>
+            <article className="">
+              <h3 className="mb-3 text-2xl">{post.title}</h3>
+              <div className="mb-1.5 flex gap-4">
+                <span>{post.timeAgo}</span>
+                <a href="/member/username">{post.username}</a>
+              </div>
+              <div className="flex gap-2">
+                <span className="">{post.comments}</span>
+                <span>comments</span>
+              </div>
+            </article>
+          </li>
+        );
+      })}
+    </ul>
   );
-});
-
-const PostList = ({ className }: PostListProps) => {
-  return <ul className={className}>{postList}</ul>;
 };
 
 export default PostList;
