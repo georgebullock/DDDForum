@@ -1,26 +1,37 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-type HeaderProps = ComponentPropsWithoutRef<"header">;
+type HeaderProps = ComponentPropsWithoutRef<"header"> & {
+  hasNav?: boolean;
+};
 
-function Header({ className }: HeaderProps) {
+function Header({ className, hasNav, ...rest }: HeaderProps) {
   return (
     <>
-      <header className={className}>
+      <header className={className} {...rest}>
         <div>
           <img src="./dddforumlogo.png" />
         </div>
         <div>
           <h1 className="text-4xl">Product Forum</h1>
-          <h3>Where product managers connect</h3>
+          <h2>Where product managers connect</h2>
         </div>
-        <nav className="flex gap-5 text-2xl">
-          <div className="flex min-w-28 justify-center border border-yellow-600 p-2">
-            <a href="/submit">Submit</a>
-          </div>
-          <div className="flex min-w-28 justify-center border border-yellow-600 p-2">
-            <a href="/register">Join</a>
-          </div>
-        </nav>
+        {hasNav && (
+          <nav className="flex gap-5 text-2xl">
+            <a
+              className="flex min-w-28 justify-center border border-yellow-600 p-2"
+              href="/submit"
+            >
+              Submit
+            </a>
+
+            <a
+              className="flex min-w-28 justify-center border border-yellow-600 p-2"
+              href="/register"
+            >
+              Join
+            </a>
+          </nav>
+        )}
       </header>
     </>
   );

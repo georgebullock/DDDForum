@@ -1,16 +1,7 @@
-import PageLayout from "./layout/PageLayout";
-import Header from "./layout/Header";
-import MainContent from "./layout/MainContent";
+import HomePage from "./Pages/HomePage";
 
 function App() {
-  return (
-    <>
-      <PageLayout className={"mx-5 my-10 flex flex-col md:max-w-3xl"}>
-        <Header className={"flex flex-col justify-center gap-5"}></Header>
-        <MainContent className={"flex flex-col justify-center gap-2"} />
-      </PageLayout>
-    </>
-  );
+  return <HomePage />;
 }
 
 export default App;

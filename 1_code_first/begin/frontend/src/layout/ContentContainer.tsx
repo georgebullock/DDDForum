@@ -2,10 +2,16 @@ import type { PropsWithChildren } from "react";
 
 type ContentContainerProps = PropsWithChildren<{ className?: string }>;
 
-function ContentContainer({ children, className }: ContentContainerProps) {
+function ContentContainer({
+  children,
+  className,
+  ...rest
+}: ContentContainerProps) {
   return (
     <>
-      <div className={className}>{children}</div>
+      <div className={className} {...rest}>
+        {children}
+      </div>
     </>
   );
 }
