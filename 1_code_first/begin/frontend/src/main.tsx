@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import RegisterPage from "./RegisterPage.tsx";
+import RegisterPage from "./Pages/RegisterPage.tsx";
 import "./index.css";
 import "./App.css";
 
