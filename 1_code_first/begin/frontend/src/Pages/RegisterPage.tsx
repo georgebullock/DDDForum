@@ -4,6 +4,7 @@ import MainContent from "../Layout/MainContent";
 import RegistrationForm from "../Components/RegistrationForm";
 
 function RegisterPage() {
+  // ToDo: Validate the form
   // ToDo: If the form is invalid
   // ToDo: Validate the form
   // ToDo: Show an error toast (for invalid input)
