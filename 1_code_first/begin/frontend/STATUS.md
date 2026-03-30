@@ -23,11 +23,9 @@
 
 - 2026-03-16 13:04 CET — Chose manual path-based rendering over React Router to keep complexity low for current course scope.
 - 2026-03-16 13:04 CET — Kept changes minimal and compositional by introducing a dedicated page component rather than modifying static `public/register.html`.
+- 2026-03-26 13:30 CET — The project will use React Form Hook + Zod to handle the apps forms. It's overkill for such a small project, but more aligned with handling more complicated forms via a reusable pattern with minimal maintenance overhead.
 
 ## Open questions / blockers
-
-- None blocking this task.
-- Follow-up consideration: whether to add a dedicated React `NotFoundPage` fallback instead of defaulting unknown paths to home.
 
 ## Next session first steps (ordered)
 
@@ -37,7 +35,6 @@
 
 ## References
 
-- `public/register.html` (course-provided registration markup source)
 - `src/RegisterPage.tsx`
 - `src/main.tsx`
 - `src/layout/Header.tsx`
@@ -46,3 +43,4 @@
 
 - The manual route table is intentionally minimal; as routes grow (dynamic params, nested layouts, guarded pages), maintainability may decline and React Router may become preferable.
 - `public/index.html` and `public/register.html` still reference `index.css` and `App.css`; Vite build warns those files do not exist at build time for those static documents.
+- **Tech Debt:** Unknown path behavior is not explicitly handled. Add a `NotFoundPage` to make unknown-path behavior explicit.
