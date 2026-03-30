@@ -6,7 +6,6 @@ import RegistrationForm from "../Components/RegistrationForm";
 function RegisterPage() {
   // ToDo: Validate the form
   // ToDo: If the form is invalid
-  // ToDo: Validate the form
   // ToDo: Show an error toast (for invalid input)
   // ToDo: If the form is valid, start isLoading
   // ToDo: Make the API call
