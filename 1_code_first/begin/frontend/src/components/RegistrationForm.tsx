@@ -3,6 +3,20 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+// Done: Validate the form
+// Done: If the form is invalid
+// Done: Show an error message
+// ToDo: If the form is valid, start isSubmitting
+// ToDo: Make the API call
+// ToDo: If the API call is successful
+// ToDo: Save the user details to the cache
+// ToDo: Stop the spinner
+// ToDo: Show the toast
+// ToDo: In 3 seconds, redirect to the main page
+// ToDo: If the call failed
+// ToDo: Stop the spinner
+// ToDo: Show the toast (for unknown error)
+
 type RegistrationFormProps = ComponentPropsWithoutRef<"section">;
 
 const registrationFormSchema = z.object({
@@ -29,13 +43,6 @@ const registrationFormSchema = z.object({
 
 type RegistrationFormData = z.infer<typeof registrationFormSchema>;
 
-const registrationFields = [
-  { name: "email", type: "email", placeholder: "email" },
-  { name: "username", type: "text", placeholder: "username" },
-  { firstname: "firstName", type: "text", placeholder: "first name" },
-  { name: "lastName", type: "text", placeholder: "last name" },
-];
-
 function RegistrationForm({ className, ...rest }: RegistrationFormProps) {
   const {
     register,
@@ -55,11 +62,17 @@ function RegistrationForm({ className, ...rest }: RegistrationFormProps) {
   });
 
   const onSubmit = async (data: RegistrationFormData) => {
+    const url = "http://localhost:3000/users/new";
+
     try {
-      console.log("data:", data);
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      console.log("response:", response);
 
       reset();
-      console.log("Registration successful");
     } catch (error) {
       console.log("Registration failed:", error);
       setError("root", {
@@ -77,22 +90,90 @@ function RegistrationForm({ className, ...rest }: RegistrationFormProps) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-3"
         aria-label="Registration form"
+        noValidate
       >
-        {registrationFields.map((field) => (
+        {errors.root && (
+          <div role="alert" className="mt-1 text-rose-500">
+            {errors.root.message}
+          </div>
+        )}
+
+        <div className="flex flex-col">
           <input
-            key={field.name}
-            type={field.type}
-            {...register(field.firstName)}
-            placeholder={field.placeholder}
+            type="email"
+            id="email"
+            {...register("email")}
+            placeholder="Email"
             className="border border-yellow-600 px-3 py-2"
           />
-        ))}
+          {errors.email && (
+            <span id="email-error" role="alert" className="mt-1 text-rose-500">
+              {errors.email.message}
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          <input
+            type="text"
+            {...register("username")}
+            placeholder="Username"
+            className="border border-yellow-600 px-3 py-2"
+          />
+          {errors.username && (
+            <span
+              id="username-error"
+              role="alert"
+              className="mt-1 text-rose-500"
+            >
+              {errors.username.message}
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          <input
+            type="text"
+            {...register("firstName")}
+            placeholder="First name"
+            className="border border-yellow-600 px-3 py-2"
+          />
+          {errors.firstName && (
+            <span
+              id="firstName-error"
+              role="alert"
+              className="mt-1 text-rose-500"
+            >
+              {errors.firstName.message}
+            </span>
+          )}
+        </div>
+
+        <div className="flex flex-col">
+          <input
+            type="text"
+            {...register("lastName")}
+            placeholder="Last name"
+            className="border border-yellow-600 px-3 py-2"
+          />
+          {errors.lastName && (
+            <span
+              id="lastName-error"
+              role="alert"
+              className="mt-1 text-rose-500"
+            >
+              {errors.lastName.message}
+            </span>
+          )}
+        </div>
 
         <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm">
             Already have an account? <a href="/login">Login</a>
           </p>
-          <button type="button">Submit</button>
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Register"}
+          </button>
         </div>
       </form>
     </section>
